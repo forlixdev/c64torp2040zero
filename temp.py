@@ -8,11 +8,11 @@ from adafruit_hid.keycode import Keycode
 kbd = Keyboard(usb_hid.devices)
 
 # Definisci i pin di colonne e righe secondo lo schema hardware
-col_pins = (board.GP0, board.GP1, board.GP2, board.GP3, board.GP4, board.GP5, board.GP6, board.GP7)
-row_pins = (board.GP8, board.GP9, board.GP10, board.GP11, board.GP12, board.GP13, board.GP14, board.GP15)
+col_pins = (board.GP7, board.GP1, board.GP2, board.GP3, board.GP4, board.GP5, board.GP6, board.GP0)
+row_pins = (board.GP8, board.GP9, board.GP10, board.GP15, board.GP12, board.GP13, board.GP14, board.GP11)
 
 # Crea la matrice hardware. Questo gestisce il debouncing in automatico
-matrix = keypad.KeyMatrix(row_pins, col_pins)
+matrix = keypad.KeyMatrix(col_pins, row_pins)
 
 # Mappatura dei 64 tasti della matrice C64 ai codici USB standard del PC.
 # L'ordine è: Riga 0 (Col0...Col7), Riga 1 (Col0...Col7), e così via.
@@ -30,7 +30,7 @@ keymap = [
     # Riga 5
     Keycode.MINUS, Keycode.P, Keycode.L, Keycode.EQUALS, Keycode.PERIOD, Keycode.SEMICOLON, Keycode.LEFT_BRACKET, Keycode.COMMA,
     # Riga 6
-    Keycode.RIGHT_BRACKET, Keycode.BACKSLASH, Keycode.QUOTE, Keycode.HOME, Keycode.RIGHT_SHIFT, Keycode.GRAVE_ACCENT, Keycode.APOSTROPHE, Keycode.SLASH,
+    Keycode.RIGHT_BRACKET, Keycode.BACKSLASH, Keycode.QUOTE, Keycode.HOME, Keycode.RIGHT_SHIFT, Keycode.GRAVE_ACCENT, Keycode.QUOTE, Keycode.FORWARD_SLASH,
     # Riga 7
     Keycode.ONE, Keycode.ESCAPE, Keycode.LEFT_CONTROL, Keycode.TWO, Keycode.SPACE, Keycode.LEFT_GUI, Keycode.Q, Keycode.LEFT_ALT
 ]
@@ -52,3 +52,4 @@ while True:
             
         elif event.released:
             kbd.release(usb_keycode)
+
